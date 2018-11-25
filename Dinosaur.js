@@ -116,6 +116,7 @@ function play () {
   heartBeat++
   if (heartBeat >= Math.random() * 500 && heartBeat >= 200) {
         
+    if (heartBeat >= 1000) {
       bigcacti()
       heartBeat = -25
     } else {
