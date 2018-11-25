@@ -114,8 +114,8 @@ function play () {
   collision(dino_y, dino_x)
   // cactus
   heartBeat++
-  if (heartBeat >= Math.random() * 200 && heartBeat >= 20) {
-    if (heartBeat >= 100) {
+  if (heartBeat >= Math.random() * 500 && heartBeat >= 200) {
+        
       bigcacti()
       heartBeat = -25
     } else {
@@ -205,6 +205,7 @@ function drawGame () {
       if (game[i][v] == 1) {
         ctx.fillStyle = 'black'
         ctx.fillRect(i * 10, v * 10, 10, 10)
+        if (v != 50) console.log('game[i='+ i + '][v=' + v + ']')
       } else if (game[i][v] == 0) {
         ctx.fillStyle = 'white'
         ctx.fillRect(i * 10, v * 10, 10, 10)
