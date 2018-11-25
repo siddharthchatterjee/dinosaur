@@ -110,7 +110,7 @@ function play () {
     tNum = 0
   }
   // displayDino(height)
-  displayWorld()
+  displayDinosaur()
   collision(dino_y, dino_x)
   // cactus
   heartBeat++
@@ -273,24 +273,12 @@ function makeCactusBig (xCoordinate) {
   }
 }
 
-/**
- * makes the actual dino at the y value given
- * @param {} yValue
- 
-function displayDino (yValue) {
-  for (let x = 0; x < 40; x++) {
-    for (let y = 0 + yValue; y < 100 + yValue; y++) {
-      dinoWorld[x][y] = 1
-    }
-  }
-}
-*/
 
 /**
- * draws the dinosaur
+ * draws the dinosaur 
  *
  */
-function displayWorld () {
+function displayDinosaur () {
   console.log('displayWorld() called')
 
   /*
