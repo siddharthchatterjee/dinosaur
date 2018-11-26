@@ -115,7 +115,6 @@ function play () {
   // cactus
   heartBeat++
   if (heartBeat >= Math.random() * 500 && heartBeat >= 200) {
-        
     if (heartBeat >= 1000) {
       bigcacti()
       heartBeat = -25
@@ -206,7 +205,7 @@ function drawGame () {
       if (game[i][v] == 1) {
         ctx.fillStyle = 'black'
         ctx.fillRect(i * 10, v * 10, 10, 10)
-        if (v != 50) console.log('game[i='+ i + '][v=' + v + ']')
+        if (v != 50) console.log('game[i=' + i + '][v=' + v + ']')
       } else if (game[i][v] == 0) {
         ctx.fillStyle = 'white'
         ctx.fillRect(i * 10, v * 10, 10, 10)
@@ -275,9 +274,8 @@ function makeCactusBig (xCoordinate) {
   }
 }
 
-
 /**
- * draws the dinosaur 
+ * draws the dinosaur
  *
  */
 function displayDinosaur () {
@@ -320,18 +318,17 @@ function differenceFinder (t) {
   return height2 - height1
 }
 function collision (yVal, xVal) {
-  let scaleY = Math.round(yVal / 10.0);
-  let scaleX = Math.round(xVal / 10.0);
-  let hit = false;
-  for (let x = scaleX; x < scaleX + dinoSizeX; x++) {
-    for (let y = scaleY; y < scaleY - dinoSizeY; y--) {
+  let scaleY = Math.round(yVal / 10.0)
+  let scaleX = Math.round(xVal / 10.0)
+  let hit = false
+  for (let x = scaleX; x < scaleX + dinoSizeX / 10; x++) {
+    for (let y = scaleY; y > scaleY - dinoSizeY / 10; y--) {
       if (game[x][y] == 1) {
-        hit = true;
+        hit = true
       }
     }
   }
 
-  console.log('collision(): hit=' + hit);
+  console.log('collision(): hit=' + hit)
   return hit
-  
 }
