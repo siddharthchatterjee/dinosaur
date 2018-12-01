@@ -95,8 +95,11 @@ function play () {
     tNum++
   }
   if (down == true) {
-    dino_y += differenceFinder(tNum)
-    tNum++
+        
+            dino_y += differenceFinder(tNum)
+            tNum++
+        
+   
   }
 
   if (dino_y >= 490) {
@@ -104,17 +107,29 @@ function play () {
     down = false
   }
 
-  if (dino_y <= 300) {
-    down = true
-    up = false
-    tNum = 0
+  
+  if(dino_y > SIZEY/2){
+        down = false;
+        up = false;
+        tNum = 0; 
   }
+  if (dino_y <= 300) {
+      down = true
+      up = false
+      tNum = 0;
+    }
+  console.log("dino_y = " + dino_y);
+  /*if(dino_y/10 <= SIZEY/2){
+        down = false;
+        
+
+  }*/
   // displayDino(height)
   displayDinosaur()
   collision(dino_y, dino_x)
   // cactus
   heartBeat++
-  if (heartBeat >= Math.random() * 500 && heartBeat >= 200) {
+  if (heartBeat >= Math.random() * 100 && heartBeat >= 20) {
     if (heartBeat >= 1000) {
       bigcacti()
       heartBeat = -25
@@ -313,8 +328,8 @@ function dino_down () {}
  * @param {} t
  */
 function differenceFinder (t) {
-  let height2 = STARTINGVELOVITY * t + -9.8 * (t * t) / 2
-  let height1 = STARTINGVELOVITY * (t - 1) + -9.8 * ((t - 1) * (t - 1)) / 2
+  let height2 = STARTINGVELOVITY * t + -0.009 * (t * t) / 2
+  let height1 = STARTINGVELOVITY * (t - 1) + -0.009 * ((t - 1) * (t - 1)) / 2
   return height2 - height1
 }
 function collision (yVal, xVal) {
