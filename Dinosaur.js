@@ -1,6 +1,6 @@
 const SIZEX = 200
 const SIZEY = 100
-const STARTINGVELOVITY = 200
+const STARTINGVELOVITY = 190;
 var heartBeat = 0
 var game = init()
 var count = 0
@@ -11,6 +11,7 @@ var down = false
 var height = 0
 var difT = 0
 var tNum = 0
+var tNum2 = 0; 
 var dinoSizeY = 100
 var dinoSizeX = 50
 
@@ -91,13 +92,14 @@ function play () {
   // dinosaur part
 
   if (up == true) {
-    dino_y -= differenceFinder(tNum)
+    dino_y -= differenceFinder(tNum,tNum2)
     tNum++
   }
   if (down == true) {
         
-            dino_y += differenceFinder(tNum)
-            tNum++
+            dino_y += differenceFinder(tNum,tNum2)
+            tNum+=0.01;
+            tNum2+=0.01;
         
    
   }
@@ -112,11 +114,13 @@ function play () {
         down = false;
         up = false;
         tNum = 0; 
+        tNum2=-1;
   }
   if (dino_y <= 300) {
       down = true
       up = false
       tNum = 0;
+      tNum2=-1;
     }
   console.log("dino_y = " + dino_y);
   /*if(dino_y/10 <= SIZEY/2){
@@ -327,9 +331,9 @@ function dino_down () {}
  * finds the differnce in heights and how much higher the dino should move
  * @param {} t
  */
-function differenceFinder (t) {
+function differenceFinder (t, t0) {
   let height2 = STARTINGVELOVITY * t + -0.009 * (t * t) / 2
-  let height1 = STARTINGVELOVITY * (t - 1) + -0.009 * ((t - 1) * (t - 1)) / 2
+  let height1 = STARTINGVELOVITY * (t0) + -0.009 * ((t0) * (t0)) / 2
   return height2 - height1
 }
 function collision (yVal, xVal) {
@@ -346,4 +350,7 @@ function collision (yVal, xVal) {
 
   console.log('collision(): hit=' + hit)
   return hit
+}
+function isEven(num){
+
 }
