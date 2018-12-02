@@ -98,8 +98,8 @@ function play () {
   if (down == true) {
         
             dino_y += differenceFinder(tNum,tNum2)
-            tNum+=0.01;
-            tNum2+=0.01;
+            tNum+=0.000000001;
+            tNum2+=0.000000001;
         
    
   }
@@ -332,8 +332,8 @@ function dino_down () {}
  * @param {} t
  */
 function differenceFinder (t, t0) {
-  let height2 = STARTINGVELOVITY * t + -0.009 * (t * t) / 2
-  let height1 = STARTINGVELOVITY * (t0) + -0.009 * ((t0) * (t0)) / 2
+  let height2 = STARTINGVELOVITY * t + -0.0009 * (t * t) / 2
+  let height1 = STARTINGVELOVITY * (t0) + -0.0009 * ((t0) * (t0)) / 2
   return height2 - height1
 }
 function collision (yVal, xVal) {
