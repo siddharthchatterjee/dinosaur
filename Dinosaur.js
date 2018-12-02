@@ -1,8 +1,11 @@
+//import { getDinoBitmapValue } from './bitmap.js';
+//import './bitmap.js'
+
 const SIZEX = 200
 const SIZEY = 100
 const STARTINGVELOVITY = 190;
 var heartBeat = 0
-var game = init()
+
 var count = 0
 var dinoWorld = initDino()
 var interval = 1000 / 10
@@ -16,8 +19,60 @@ var dinoSizeY = 100
 var dinoSizeX = 50
 
 // location of the dinosaur
-var dino_x = 50
-var dino_y = 48 * 10
+var dino_x = 50;
+var dino_y = 48 * 10;
+var dino1 = [
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,
+0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,1,
+0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,
+1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,
+1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,
+1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,
+1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,
+1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,
+0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,
+0,0,0,0,0,1,1,1,0,1,1,1,0,0,0,0,0,0,0,
+0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0,0,0,
+0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0,0];
+
+const dino2 = [
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,
+    0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+    0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,1,
+    0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+    0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,
+    1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+    1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,
+    1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,
+    1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,
+    1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,
+    1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+    0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+    0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,
+    0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,
+    0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,
+    0,0,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0,
+    0,0,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,0,0,
+    0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0];
+
+
 
 window.addEventListener(
   'keydown',
@@ -39,6 +94,9 @@ window.addEventListener(
   false
 )
 
+var game = init();
+
+
 function init () {
   let game = new Array(SIZEX)
   for (var i = 0; i < SIZEX; i++) {
@@ -50,6 +108,9 @@ function init () {
   }
 
   game[100][10] = 1
+
+  let bitValue = getDinoBitmapValue (0, 2, 1);
+  console.log('bitValue = ' + bitValue);
 
   console.log('init done')
   return game
@@ -122,7 +183,7 @@ function play () {
       tNum = 0;
       tNum2=-1;
     }
-  console.log("dino_y = " + dino_y);
+  //console.log("dino_y = " + dino_y);
   /*if(dino_y/10 <= SIZEY/2){
         down = false;
         
@@ -171,7 +232,7 @@ function test () {
       let x = Math.round(Math.random() * SIZEX)
       let y = Math.round(Math.random() * SIZEY)
 
-      console.log('count=' + count + ', x=' + x + ', y=' + y)
+      //console.log('count=' + count + ', x=' + x + ', y=' + y)
       ctx.fillRect(x, y, 10, 10)
     }
     //  sleep ();
@@ -224,7 +285,7 @@ function drawGame () {
       if (game[i][v] == 1) {
         ctx.fillStyle = 'black'
         ctx.fillRect(i * 10, v * 10, 10, 10)
-        if (v != 50) console.log('game[i=' + i + '][v=' + v + ']')
+        //if (v != 50) console.log('game[i=' + i + '][v=' + v + ']')
       } else if (game[i][v] == 0) {
         ctx.fillStyle = 'white'
         ctx.fillRect(i * 10, v * 10, 10, 10)
@@ -353,4 +414,25 @@ function collision (yVal, xVal) {
 }
 function isEven(num){
 
+} 
+
+
+
+    /**
+     * Return whether the dinosaur has a 0 or 1 at this x, y location for the given counter (0, 1, 2)
+     * @param {*} cycleCounter 
+     * @param {*} x 
+     * @param {*} y 
+     */
+function getDinoBitmapValue (cycleCounter, x, y)
+{
+// get the right variable based on the counter
+let dino = (cycleCounter == 0) ? dino1 : dino2;
+
+let index = y * 18 + x;
+return dino[index];
 }
+
+
+
+
