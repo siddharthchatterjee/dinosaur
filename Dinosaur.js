@@ -443,7 +443,9 @@ function drawDino(){
             for(var y = 0; y < 25; y ++){
                   // checks if that value is filled in
                   if(getDinoBitmapValue(0,x,y) == 1){
-                        ctx.fillRect(x*4,y*4+SIZEY/2,4,4)
+                    console.log("drawDino() - got 1 at x=" + x + ", y=" + y);
+                    ctx.fillStyle = 'red';
+                    ctx.fillRect(x*4,y*4+SIZEY/2,4,4)
                   }
 
             }
@@ -463,7 +465,7 @@ function getDinoBitmapValue (cycleCounter, x, y)
 // get the right variable based on the counter
 let dino = (cycleCounter == 0) ? dino1 : dino2;
 
-let index = y * 18 + x;
+let index = y * 19 + x;
 return dino[index];
 }
 
