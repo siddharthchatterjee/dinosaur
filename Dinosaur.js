@@ -17,6 +17,7 @@ var tNum = 0
 var tNum2 = 0;
 var dinoSizeY = 100
 var dinoSizeX = 50
+var stance = 0;
 
 // location of the dinosaur
 var dino_x = 50;
@@ -215,7 +216,11 @@ function play() {
 
   }*/
   // displayDino(height)
-  drawDino(0);
+  drawDino(stance);
+  stance++;
+  if(stance == 3){
+    stance = 0;
+  }
   collision(dino_y, dino_x)
   // cactus
   heartBeat++
@@ -452,7 +457,7 @@ function drawDino(cycle) {
       if (getDinoBitmapValue(cycle, x, y) == 1) {
         console.log("drawDino() - got 1 at x=" + x + ", y=" + y);
         ctx.fillStyle = 'red';
-        ctx.fillRect(x * 4, y * 4 + SIZEY / 2, 4, 4)
+        ctx.fillRect(x * 4, y *4+300+ SIZEY / 2, 4, 4)
       }
 
     }
