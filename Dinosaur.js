@@ -387,33 +387,7 @@ function makeCactusBig(xCoordinate) {
   }
 }
 
-/**
- * draws the dinosaur
- *
- */
-function displayDinosaur() {
-  console.log('displayWorld() called')
 
-  /*
-  for (let i = 0; i < SIZEX; i++) {
-    for (let v = 0; v < SIZEY; v++) {
-      if (dinoWorld[i][v] == 1) {
-
-        ctx.fillStyle = "black";
-        ctx.fillRect(i * 10, v * 10, 10, 10)
-      }
-      else if (dinoWorld[i][v] == 0) {
-        ctx.fillStyle = "white";
-        ctx.fillRect(i * 10, v * 10, 10, 10);
-      }
-
-    }
-  }
-  */
-
-  ctx.fillStyle = 'red'
-  ctx.fillRect(dino_x, dino_y - dinoSizeY, dinoSizeX, dinoSizeY)
-}
 
 function dino_up() {
   console.log('dino_up(): called')
