@@ -181,12 +181,13 @@ function play() {
   if (up == true) {
     dino_y -= differenceFinder(tNum, tNum2)
     tNum++
+    tNum2++
   }
   if (down == true) {
 
     dino_y += differenceFinder(tNum, tNum2)
-    tNum += 0.000000001;
-    tNum2 += 0.000000001;
+    tNum ++
+    tNum2 ++;
 
 
   }
@@ -457,7 +458,7 @@ function drawDino(cycle) {
       if (getDinoBitmapValue(cycle, x, y) == 1) {
         console.log("drawDino() - got 1 at x=" + x + ", y=" + y);
         ctx.fillStyle = 'red';
-        ctx.fillRect(x * 4, y *4+300+ SIZEY / 2, 4, 4)
+        ctx.fillRect(x * 4, y *4+300+ SIZEY + dino_y / 2, 4, 4)
       }
 
     }
