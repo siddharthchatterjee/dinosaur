@@ -18,6 +18,7 @@ var tNum2 = 0;
 var dinoSizeY = 100
 var dinoSizeX = 50
 var stance = 0;
+var dead = false;
 
 // location of the dinosaur
 var dino_x = 50;
@@ -172,6 +173,7 @@ function player() {
 }
 
 function play() {
+  if(dead == true){
   console.log('play() called')
   moveRoad()
   drawGame()
@@ -245,6 +247,12 @@ function play() {
 
     console.log('sped up to interval=' + interval)
   }
+}
+else if(dead = true){
+  clear();
+  document.write("You lose, Your Score is: ");
+  document.write(heartBeat);
+}
 }
 
 function cacti() {
@@ -405,7 +413,7 @@ function dino_down() {
 function differenceFinder(t, t0) {
   let height2 = STARTINGVELOVITY * t + -0.0009 * (t * t) / 2
   let height1 = STARTINGVELOVITY * (t0) + -0.0009 * ((t0) * (t0)) / 2
-  return height2 - height1
+  return (height2 - height1)
 }
 
 function collision(yVal, xVal) {
@@ -416,6 +424,7 @@ function collision(yVal, xVal) {
     for (let y = scaleY; y > scaleY - dinoSizeY / 10; y--) {
       if (game[x][y] == 1) {
         hit = true
+        dead = true
       }
     }
   }
