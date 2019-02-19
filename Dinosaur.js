@@ -19,6 +19,7 @@ var dinoSizeY = 100
 var dinoSizeX = 50
 var stance = 0;
 var dead = false;
+var score = 0;
 
 // location of the dinosaur
 var dino_x = 50;
@@ -173,7 +174,7 @@ function player() {
 }
 
 function play() {
-  if(dead == true){
+  if(dead == false){
   console.log('play() called')
   moveRoad()
   drawGame()
@@ -248,15 +249,18 @@ function play() {
     console.log('sped up to interval=' + interval)
   }
 }
-else if(dead = true){
+else if(dead == true){
   clear();
   document.write("You lose, Your Score is: ");
-  document.write(heartBeat);
+  document.write(score);
+  
+  dead = false;
 }
 }
 
 function cacti() {
-  makeCactus(100)
+  makeCactus(100);
+  score ++;
 }
 
 function bigcacti() {
@@ -408,7 +412,7 @@ function dino_down() {
 
 /**
  * finds the differnce in heights and how much higher the dino should move
- * @param {} t
+ * @param {} 
  */
 function differenceFinder(t, t0) {
   let height2 = STARTINGVELOVITY * t + -0.0009 * (t * t) / 2
