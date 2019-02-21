@@ -20,6 +20,7 @@ var dinoSizeX = 50
 var stance = 0;
 var dead = false;
 var score = 0;
+var shown = false;
 
 // location of the dinosaur
 var dino_x = 50;
@@ -248,12 +249,14 @@ function play() {
 
     console.log('sped up to interval=' + interval)
   }
+  
 }
-else if(dead == true){
+else if(dead == true && shown == false){
   clear();
   document.write("You lose, Your Score is: ");
   document.write(score);
-  
+  document.clear()
+shown = true;
   dead = false;
 }
 }
