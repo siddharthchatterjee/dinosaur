@@ -185,13 +185,13 @@ function play() {
   // dinosaur part
 
   if (up == true) {
-    dino_y -= differenceFinder(tNum, tNum2) / 10.0;
+    dino_y -= differenceFinder(tNum, tNum2) / 2.5;
     tNum++
     tNum2++
   }
   if (down == true) {
 
-    dino_y += differenceFinder(tNum, tNum2) / 10.0;
+    dino_y += differenceFinder(tNum, tNum2) / 2.5;
     tNum ++
     tNum2 ++;
 
@@ -214,7 +214,7 @@ function play() {
     tNum2 = -1;
   }
   */
-  if (dino_y <= 300) {
+  if (dino_y <= 200) {
     down = true
     up = false
     tNum = 0;
@@ -235,7 +235,7 @@ function play() {
   collision(dino_y, dino_x)
   // cactus
   heartBeat++
-  if (heartBeat >= Math.random() * 100 && heartBeat >= 20) {
+  if (heartBeat >= Math.random() * 200 && heartBeat >= 30) {
     if (heartBeat >= 1000) {
       bigcacti()
       heartBeat = -25
@@ -424,8 +424,8 @@ function dino_down() {
  * @param {} 
  */
 function differenceFinder(t, t0) {
-  let height2 = STARTINGVELOVITY * t + -0.0009 * (t * t) / 2
-  let height1 = STARTINGVELOVITY * (t0) + -0.0009 * ((t0) * (t0)) / 2
+  let height2 = STARTINGVELOVITY * t + -0.0009 * (t * t) / 1
+  let height1 = STARTINGVELOVITY * (t0) + -0.0009 * ((t0) * (t0)) / 1
   return (height2 - height1)
 }
 
