@@ -23,8 +23,10 @@ var score = 0;
 var shown = false;
 
 // location of the dinosaur
+const FLOOR = 48 * 10;
 var dino_x = 50;
-var dino_y = 48 * 10;
+var dino_y = FLOOR;
+
 var dino1 = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -183,31 +185,35 @@ function play() {
   // dinosaur part
 
   if (up == true) {
-    dino_y -= differenceFinder(tNum, tNum2)
+    dino_y -= differenceFinder(tNum, tNum2) / 10.0;
     tNum++
     tNum2++
   }
   if (down == true) {
 
-    dino_y += differenceFinder(tNum, tNum2)
+    dino_y += differenceFinder(tNum, tNum2) / 10.0;
     tNum ++
     tNum2 ++;
 
 
   }
 
-  if (dino_y >= 490) {
+  if (dino_y >= FLOOR+10) {
+    dino_y = FLOOR;
     up = false
     down = false
+    tNum = 0;
+    tNum2 = -1;
   }
 
-
+/*
   if (dino_y > SIZEY / 2) {
     down = false;
     up = false;
     tNum = 0;
     tNum2 = -1;
   }
+  */
   if (dino_y <= 300) {
     down = true
     up = false
