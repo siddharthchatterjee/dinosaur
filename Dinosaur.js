@@ -255,6 +255,7 @@ function play() {
 
     console.log('sped up to interval=' + interval)
   }
+  tnum2 = tnum+1;
   
 }
 else if(dead == true && shown == false){
@@ -425,7 +426,7 @@ function dino_down() {
  */
 function differenceFinder(t, t0) {
   let height2 = STARTINGVELOVITY * t + -0.0009 * (t * t) / 1
-  let height1 = STARTINGVELOVITY * (t0) + -0.0009 * ((t0) * (t0)) / 1
+  let height1 = STARTINGVELOVITY * (t-1) + -0.0009 * ((t-1) * (t-1)) / 1
   return (height2 - height1)
 }
 
