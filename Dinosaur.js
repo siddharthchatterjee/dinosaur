@@ -412,11 +412,14 @@ function makeCactusBig(xCoordinate) {
 
 
 function dino_up() {
+  
   console.log('dino_up(): called')
+  if(up != true && down != true){
   up = true
   tNum = 1
+  } 
 }
-
+ 
 function dino_down() {
 }
 
