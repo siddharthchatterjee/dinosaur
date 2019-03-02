@@ -189,7 +189,7 @@ function play() {
     tNum++
     tNum2++
   }
-  if (down == true) {
+  else  if (down == true) {
 
     dino_y += differenceFinder(tNum, tNum2) / 2.5;
     tNum ++
