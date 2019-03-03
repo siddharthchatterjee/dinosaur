@@ -197,7 +197,9 @@ function play() {
   createRoad()
   // dinosaur part
 
+    // move dino up/down half as slowly as everything else
     if (even) {
+
       if (up == true) {
         dino_y -= differenceFinder(tNum, tNum2) / 2.5;
         tNum++
@@ -212,8 +214,8 @@ function play() {
     }
   if (dino_y >= FLOOR+10) {
     dino_y = FLOOR;
-    up = false
-    down = false
+    up = false;
+    down = false;
     tNum = 0;
     tNum2 = -1;
   }
@@ -226,9 +228,9 @@ function play() {
     tNum2 = -1;
   }
   */
-  if (dino_y <= 200) {
-    down = true
-    up = false
+  if (dino_y <= 100) {
+    down = true;
+    up = false;
     tNum = 0;
     tNum2 = -1;
   }
@@ -290,6 +292,7 @@ function playDead ()
 {
   // stop playing game
   clearInterval(intervalVar);
+  
 }
 
 function cacti() {
