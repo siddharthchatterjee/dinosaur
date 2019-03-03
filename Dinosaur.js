@@ -23,6 +23,7 @@ var score = 0;
 var shown = false;
 var even = true;
 
+
 // location of the dinosaur
 const FLOOR = 48 * 10;
 var dino_x = 50;
@@ -186,7 +187,9 @@ function player() {
 }
 
 function play() {
-
+  let gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+  gradient.addColorStop("0","black");
+  gradient.addColorStop("1.0", "grey"	);
   // make it even or odd
   even = !even;
 
@@ -196,7 +199,9 @@ function play() {
   drawGame()
   createRoad()
   // dinosaur part
-
+  ctx.font = "15px Georgia";
+ctx.fillStyle = gradient;
+  ctx.fillText("Score: " + score, 900, 150);
     // move dino up/down half as slowly as everything else
     if (even) {
 
