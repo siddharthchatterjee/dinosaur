@@ -8,7 +8,7 @@ var heartBeat = 0
 
 var count = 0
 var dinoWorld = initDino()
-var interval = 1000 / 10
+var interval = 1000 / 20;
 var up = false
 var down = false
 var height = 0
@@ -21,6 +21,7 @@ var stance = 0;
 var dead = false;
 var score = 0;
 var shown = false;
+var even = true;
 
 // location of the dinosaur
 const FLOOR = 48 * 10;
@@ -129,16 +130,21 @@ var game = init();
 
 
 function init() {
-  let game = new Array(SIZEX)
+  let game = new Array(SIZEX);
+
+  let v = 0;
+
   for (var i = 0; i < SIZEX; i++) {
     game[i] = new Array(SIZEY)
+
+    v = 0;
+
     for (let y = 0; y < SIZEY; y++) {
-      game[i][y] = 0
-      ;``
+      game[i][y] = v;
     }
   }
 
-  game[100][10] = 1
+  //game[100][10] = 1
 
   let bitValue = getDinoBitmapValue(0, 2, 1);
   console.log('bitValue = ' + bitValue);
@@ -156,7 +162,10 @@ function initDino() {
     }
   }
 
-  game[100][50] = 1
+  // draw road
+  game[100][50] = 1;
+
+
 
   return game
 }
@@ -177,6 +186,10 @@ function player() {
 }
 
 function play() {
+
+  // make it even or odd
+  even = !even;
+
   if(dead == false){
   console.log('play() called')
   moveRoad()
@@ -184,20 +197,19 @@ function play() {
   createRoad()
   // dinosaur part
 
-  if (up == true) {
-    dino_y -= differenceFinder(tNum, tNum2) / 2.5;
-    tNum++
-    tNum2++
-  }
-  else  if (down == true) {
+    if (even) {
+      if (up == true) {
+        dino_y -= differenceFinder(tNum, tNum2) / 2.5;
+        tNum++
+        tNum2++
+      }
+      else if (down == true) {
 
-    dino_y += differenceFinder(tNum, tNum2) / 2.5;
-    tNum ++
-    tNum2 ++;
-
-
-  }
-
+        dino_y += differenceFinder(tNum, tNum2) / 2.5;
+        tNum++
+        tNum2++;
+      }
+    }
   if (dino_y >= FLOOR+10) {
     dino_y = FLOOR;
     up = false
@@ -233,6 +245,7 @@ function play() {
     stance = 0;
   }
   collision(dino_y, dino_x)
+
   // cactus
   heartBeat++
   if (heartBeat >= Math.random() * 200 && heartBeat >= 30) {
@@ -255,17 +268,28 @@ function play() {
 
     console.log('sped up to interval=' + interval)
   }
-  tnum2 = tnum+1;
+  tNum2 = tNum+1;
   
 }
 else if(dead == true && shown == false){
+  /*
   clear();
   document.write("You lose, Your Score is: ");
   document.write(score);
   document.clear()
-shown = true;
+
+  shown = true;
   dead = false;
+  */
+  playDead ();
+
 }
+}
+
+function playDead ()
+{
+  // stop playing game
+  clearInterval(intervalVar);
 }
 
 function cacti() {
@@ -298,11 +322,20 @@ async function pause() {
 }
 
 function createRoad() {
-  var pixel = 0
-  var height = SIZEY / 2
+  var pixel = 0;
+  var height = SIZEY / 2;
   while (pixel < SIZEX) {
-    game[pixel][height] = 1
-    pixel++
+    game[pixel][height] = 1;
+
+    /*
+    // create some gravel below
+    if (pixel % 3 == 0 || pixel % 4 == 0 || pixel % 5 == 0)
+    {
+      game[pixel][height+2] = 1;
+    }
+    */
+
+    pixel++;
   }
 }
 
@@ -336,16 +369,36 @@ function drawGame() {
   // console.log('drawGame() called');
   for (let i = 0; i < SIZEX; i++) {
     for (let v = 0; v < SIZEY; v++) {
-      if (game[i][v] == 1) {
-        ctx.fillStyle = 'black'
-        ctx.fillRect(i * 10, v * 10, 10, 10)
+      if (game[i][v] == 1
+     //  || isEdge (i, v)
+      ) {
+        drawPixel (i, v, 'black');
         //if (v != 50) console.log('game[i=' + i + '][v=' + v + ']')
       } else if (game[i][v] == 0) {
-        ctx.fillStyle = 'white'
-        ctx.fillRect(i * 10, v * 10, 10, 10)
+        drawPixel (i, v, 'white');
       }
     }
   }
+}
+
+/**
+ * Given a array location, scale it and draw it on the canvas
+ * @param x
+ * @param y
+ * @param color
+ */
+function drawPixel (x, y, color)
+{
+  ctx.fillStyle = color;
+  ctx.fillRect(x * 10, y * 10, 10, 10);
+}
+
+function isEdge (x, y)
+{
+  // paint the edge of game black
+  if (x == 0 || x == SIZEX - 1 || y == 0 || y == SIZEY-1) return true;
+
+  return false;
 }
 
 function makeCactus(xCoordinate) {
@@ -440,8 +493,11 @@ function collision(yVal, xVal) {
   for (let x = scaleX; x < scaleX + dinoSizeX / 10; x++) {
     for (let y = scaleY; y > scaleY - dinoSizeY / 10; y--) {
       if (game[x][y] == 1) {
-        hit = true
-        dead = true
+        hit = true;
+        dead = true;
+
+        // draw the location that hit
+        drawPixel(x, y, 'red');
       }
     }
   }
@@ -456,7 +512,7 @@ function drawDino(cycle) {
     for (var y = 0; y < 25; y++) {
       // checks if that value is filled in
       if (getDinoBitmapValue(cycle, x, y) == 1) {
-        console.log("drawDino() - got 1 at x=" + x + ", y=" + y);
+        //console.log("drawDino() - got 1 at x=" + x + ", y=" + y);
         ctx.fillStyle = 'red';
         ctx.fillRect(x * 4, y *4+60+ SIZEY + dino_y / 2, 4, 4)
       }
