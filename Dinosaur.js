@@ -122,6 +122,16 @@ window.addEventListener(
       case 40:
         dino_down()
         break
+
+      // left arrow
+      case 37:
+        slow_down ();
+        break;
+
+        // right arrow
+      case 39:
+        speed_up ();
+        break;
     }
   },
   false
@@ -482,6 +492,16 @@ function dino_up() {
 }
  
 function dino_down() {
+}
+
+function speed_up ()
+{
+  interval -= 10;
+  }
+
+function slow_down ()
+{
+  interval += 10;
 }
 
 /**
